@@ -1,0 +1,42 @@
+@import "mixin";
+
+.themeMixin({
+  :host {
+    .app-toolbar-header {
+      background-image: url("/assets/images/homepage/background.jpg");
+      box-shadow: @shadow-1-down;
+    }
+  }
+});
+
+.app-header {
+  height: 4rem;
+  flex: 0 1 100%;
+
+  .app-toolbar-header {
+    .header-title-wrapper {
+      display: flex;
+      align-items: center;
+
+      .header-title-home-link {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    /*.header-actions-wrapper {
+      display: flex;
+      align-items: center;
+
+      .header-action-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-user-account-dropdown {
+        display: flex;
+        align-items: center;
+      }
+    }*/
+  }
+}

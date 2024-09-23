@@ -1,0 +1,163 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-image: url("/assets/images/homepage/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.homepage-container {
+  min-height: 100vh;
+}
+
+form {
+  width: 100%;
+}
+
+.header {
+  padding-top: 100px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #505050;
+  text-align: center;
+}
+
+.form-container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 5px 10px rgba(80, 80, 80, 0.3);
+  border-radius: 0.6rem;
+  padding: 1rem;
+}
+
+.input {
+  position: relative;
+  flex-basis: 22%;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(80, 80, 80, 0.3);
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: transparent;
+}
+
+.input input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.input img {
+  margin-left: 0.5rem;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background-color: white;
+  z-index: 1000;
+}
+
+.dropdown ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Product Section */
+#product {
+  width: 100%;
+  padding: 4rem 0;
+}
+
+.product-info {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.product-title {
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: #505050;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search {
+  background-color: #505050;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: opacity 300ms;
+}
+
+.search:hover {
+  opacity: 0.8;
+}
+
+.product-card {
+  flex-basis: 28%;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(80, 80, 80, 0.2);
+  padding: 1rem;
+  transition: transform 300ms;
+  cursor: pointer;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-img {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 300ms;
+}
+
+.card-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.price {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

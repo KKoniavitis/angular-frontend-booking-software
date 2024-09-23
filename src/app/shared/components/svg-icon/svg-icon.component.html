@@ -1,0 +1,4 @@
+<svg [class]="size ? 'icon-' + size : 'icon-md'" [attr.style]="style">
+  // SVG elements don't have properties, therefore attribute binding is needed // https://stackoverflow.com/a/35082700
+  <use attr.xlink:href="{{ src }}"></use>
+</svg>

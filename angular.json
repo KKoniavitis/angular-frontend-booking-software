@@ -1,0 +1,224 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "tmi_frontend": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "dayjs",
+              "dayjs/plugin/isLeapYear",
+              "dayjs/plugin/utc",
+              "dayjs/plugin/timezone",
+              "dayjs/plugin/updateLocale",
+              "dayjs/plugin/customParseFormat",
+              "dayjs/plugin/weekday",
+              "dayjs/plugin/localeData",
+              "dayjs/plugin/localizedFormat"
+            ],
+            "customWebpackConfig": {
+              "path": "custom-webpack.config.ts",
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/tmi_frontend",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": ["zone.js", "src/app/infrastructure/process/process.config.ts"],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "less",
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.json"],
+            "styles": [
+              "src/styles.less",
+              {
+                "input": "src/assets/less/default.less",
+                "bundleName": "default",
+                "inject": false
+              },
+              {
+                "input": "src/assets/less/dark.less",
+                "bundleName": "dark",
+                "inject": false
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/less/themes"]
+            },
+            "scripts": []
+          },
+          "configurations": {
+            "local": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "development": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "ignore": ["**/*.svg", "**/*.scss", "**/*.less"],
+                  "output": "/assets/"
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/",
+                  "output": "/"
+                },
+                {
+                  "glob": "manifest.json",
+                  "input": "src/",
+                  "output": "/"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "uat": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "ignore": ["**/*.svg", "**/*.scss", "**/*.less"],
+                  "output": "/assets/"
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/",
+                  "output": "/"
+                },
+                {
+                  "glob": "manifest.json",
+                  "input": "src/",
+                  "output": "/"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
+                }
+              ]
+            },
+            "production": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "ignore": ["**/*.svg", "**/*.scss", "**/*.less"],
+                  "output": "/assets/"
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/",
+                  "output": "/"
+                },
+                {
+                  "glob": "manifest.json",
+                  "input": "src/",
+                  "output": "/"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "local"
+        },
+        "serve": {
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "configurations": {
+            "local": {
+              "buildTarget": "tmi_frontend:build:local"
+            },
+            "development": {
+              "buildTarget": "tmi_frontend:build:development"
+            },
+            "uat": {
+              "buildTarget": "tmi_frontend:build:uat"
+            },
+            "production": {
+              "buildTarget": "tmi_frontend:build:production"
+            }
+          },
+          "defaultConfiguration": "local"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "tmi_frontend:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/custom-webpack:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "less",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.less"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html", "scripts/**/*.mjs"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "schematicCollections": ["@angular-eslint/schematics"],
+    "analytics": false
+  }
+}

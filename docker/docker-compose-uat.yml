@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  app:
+    image: angular-redux-rxjs-clean-architecture-skeleton:uat-v${CMD_APP_VERSION} # Command line argument e.g CMD_APP_VERSION=0.0.1 docker compose -f docker-compose-uat.yml --env-file .env.uat up -d
+    container_name: angular-redux-rxjs-clean-architecture-skeleton
+    ports:
+      - "${APP_UI_PORT}:80"
+      - "6600:6600"
+    networks:
+      - frontend
+    labels:
+      application.info: "Angular"
+    volumes:
+      - .env.uat:/opt/app/assets/env/.env.uat
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: "2048M"
+
+networks:
+  frontend:
+    name: frontend-network

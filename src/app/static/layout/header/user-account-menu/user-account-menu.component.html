@@ -1,0 +1,18 @@
+<a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+  <app-svg-icon [icon]="'user'" [size]="'lg'" class="user-account-menu-icon"></app-svg-icon>
+  <app-svg-icon [icon]="'angle-down'" [size]="'lg'" class="user-account-menu-btn"></app-svg-icon>
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable class="user-account-dropdown-menu">
+    <li nz-menu-item (click)="handleProfileClick()">Προφίλ</li>
+    <li nz-menu-item>
+      <app-svg-icon
+        [icon]="'fill'"
+        [size]="'lg'"
+        class="user-account-menu-item-toggle-theme-icon"
+        (click)="handleToggleThemeClick()"
+      ></app-svg-icon>
+    </li>
+    <li nz-menu-item nzDanger (click)="handleLogoutClick()">Αποσύνδεση</li>
+  </ul>
+</nz-dropdown-menu>

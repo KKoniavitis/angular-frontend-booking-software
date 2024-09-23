@@ -1,0 +1,20 @@
+.app-loader-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.56);
+}
+
+.app-container {
+  display: flex;
+  flex-flow: column wrap;
+
+  .app-content {
+    flex: 1;
+    min-height: calc(100vh - 4rem - 3rem);
+  }
+}

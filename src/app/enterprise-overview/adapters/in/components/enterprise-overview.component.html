@@ -1,0 +1,113 @@
+<body>
+<div class="homepage-container">
+  <form>
+    <div class="header">
+      <h1>Κάντε κράτηση για τοπικές υπηρεσίες ομορφιάς και ευεξίας</h1>
+    </div>
+    <div class="form-container">
+      <div class="input">
+        <input type="text" placeholder="Οποιαδήποτε θεραπεία ή χώρος"
+               [(ngModel)]="selectedTherapy"
+               [ngModelOptions]="{standalone: true}"
+               (focus)="onFocusTherapies()"
+               (click)="onFocusTherapies()"
+        />
+        <div class="dropdown" *ngIf="showDropdownTherapies">
+          <ul>
+            <li *ngFor="let therapy of therapies" (click)="selectTherapy(therapy)">
+              {{ therapy.name }}
+            </li>
+          </ul>
+        </div>
+        <img src="/assets/images/homepage/search.svg" alt="search icon" />
+      </div>
+      <div class="input">
+        <input
+          type="text"
+          placeholder="Τοποθεσία"
+          [(ngModel)]="selectedLocation"
+          [ngModelOptions]="{standalone: true}"
+          (focus)="onFocus()"
+          (click)="onFocus()"
+        />
+        <div class="dropdown" *ngIf="showDropdown">
+          <ul>
+            <li *ngFor="let location of locations" (click)="selectLocation(location)">
+              {{ location.name }}
+            </li>
+          </ul>
+        </div>
+        <img src="/assets/images/homepage/location.svg" alt="location icon" />
+      </div>
+      <div class="input">
+        <input type="date" placeholder="Ημερομηνία" />
+      </div>
+      <div class="input">
+        <input type="time" placeholder="Ώρα" />
+      </div>
+      <div class="input search">
+        <input type="submit" value="Αναζήτηση" />
+      </div>
+    </div>
+  </form>
+
+  <!-- Product section -->
+  <section id="product">
+    <div class="product-info">
+      <h2 class="product-title">Δημοφιλή</h2>
+    </div>
+    <div class="container">
+      <!-- Product Card 1 -->
+      <div class="product-card">
+        <img src="/assets/images/homepage/roosters.jpg" alt="Roosters Barbershop" class="product-img" />
+        <div class="card-info">
+          <div class="card-info-content">
+            <p>Roosters Barbershop Ampelokipoi</p>
+          </div>
+          <div class="card-info-content">
+            <div>
+              <img src="/assets/images/homepage/location.svg" alt="location icon" />
+              Αμπελόκηποι, Αθήνα
+            </div>
+          </div>
+          <div class="price">Κουρείο</div>
+        </div>
+      </div>
+
+      <!-- Product Card 2 -->
+      <div class="product-card">
+        <img src="/assets/images/homepage/highlashartistry.jpg" alt="High Lash Artistry" class="product-img" />
+        <div class="card-info">
+          <div class="card-info-content">
+            <p>High Lash Artistry</p>
+          </div>
+          <div class="card-info-content">
+            <div>
+              <img src="/assets/images/homepage/location.svg" alt="location icon" />
+              Ίλιον, Αθήνα
+            </div>
+          </div>
+          <div class="price">Beauty Salon</div>
+        </div>
+      </div>
+
+      <!-- Product Card 3 -->
+      <div class="product-card">
+        <img src="/assets/images/homepage/saltybeautyclinic.jpg" alt="Salty Beauty Clinic" class="product-img" />
+        <div class="card-info">
+          <div class="card-info-content">
+            <p>Salty Beauty Clinic</p>
+          </div>
+          <div class="card-info-content">
+            <div>
+              <img src="/assets/images/homepage/location.svg" alt="location icon" />
+              Εύοσμος, Θεσσαλονίκη
+            </div>
+          </div>
+          <div class="price">Beauty Salon</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</body>

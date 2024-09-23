@@ -1,0 +1,16 @@
+<a nz-dropdown nzTrigger="click" [nzDropdownMenu]="langMenu">
+  <app-svg-icon [icon]="'globe'" [size]="'xl'" class="header-lang-switcher-icon"></app-svg-icon>
+  <app-svg-icon [icon]="'angle-down'" [size]="'lg'" class="header-user-account-btn"></app-svg-icon>
+</a>
+<nz-dropdown-menu #langMenu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li
+      nz-menu-item
+      *ngFor="let locale of supportedLanguages"
+      (click)="handleLanguageSwitchClick(locale)"
+      [ngStyle]="{ backgroundColor: isLanguageSelected(locale) ? '#A5C6FFFF' : 'inherit' }"
+    >
+      <app-svg-icon [icon]="resolveLangIcon(locale)" [size]="'xl'" class="header-lang-switcher-icon"></app-svg-icon>
+    </li>
+  </ul>
+</nz-dropdown-menu>

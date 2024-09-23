@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    image: angular-redux-rxjs-clean-architecture-skeleton:development-v${CMD_APP_VERSION} # Command line argument e.g CMD_APP_VERSION=0.0.1 docker compose -f docker-compose-development.yml --env-file .env.development up -d
+    container_name: angular-redux-rxjs-clean-architecture-skeleton
+    ports:
+      - "${APP_UI_PORT}:80"
+      - "5500:5500"
+    networks:
+      - frontend
+    labels:
+      application.info: "Angular"
+    volumes:
+      - .env.development:/opt/app/assets/env/.env.development
+    deploy:
+      resources:
+        limits:
+          cpus: "0.8"
+          memory: "1024M"
+
+networks:
+  frontend:
+    name: frontend-network

@@ -1,0 +1,46 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-image: url("/assets/images/login/wellness_login.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  .login-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    .login-title{
+      color: white;
+      height: 2rem;
+      font-size: 3em;
+      font-weight: 200;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+    }
+
+    .login-btn {
+      width: 15rem;
+      height: 5rem;
+      background-color: green;
+      border-color: transparent;
+      font-size: 2.5em;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.2); /* Zoom in effect */
+    }
+
+
+
+    /*.ant-btn, .ant-btn>span, .ant-scroll-number-only {
+      display: flex !important;
+    }*/
+  }
+}

@@ -1,0 +1,8 @@
+<app-loader *ngIf="isAppLoaderLoading$ | async" class="app-loader-container" />
+<div class="app-container">
+  <app-header />
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer />
+</div>

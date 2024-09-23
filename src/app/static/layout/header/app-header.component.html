@@ -1,0 +1,16 @@
+<header class="app-header">
+  <nz-page-header class="app-toolbar-header">
+    <nz-page-header-title class="header-title-wrapper">
+      <a href="#home" [routerLink]="['/']" class="header-title-home-link">
+        <img src="/assets/images/logo/welness-logo.jpg" width="20px" alt="" />
+      </a>
+    </nz-page-header-title>
+    <nz-page-header-extra>
+      <nz-space [nzSize]="'middle'">
+        <div class="header-user-account-wrapper" *nzSpaceItem>
+          <app-user-account-menu />
+        </div>
+      </nz-space>
+    </nz-page-header-extra>
+  </nz-page-header>
+</header>

@@ -1,0 +1,84 @@
+:host {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  @medium-icon-size: 1em;
+  @icon-size-increase: 0.33; // 33% increase from previous size
+
+  svg {
+    display: inline-block;
+    all: inherit;
+  }
+
+  .icon-xs {
+    width: calc(@medium-icon-size * (1 - @icon-size-increase - @icon-size-increase));
+    height: calc(@medium-icon-size * (1 - @icon-size-increase - @icon-size-increase));
+  }
+
+  .icon-xs {
+    width: calc(@medium-icon-size * (1 - @icon-size-increase));
+    height: calc(@medium-icon-size * (1 - @icon-size-increase));
+  }
+
+  .icon-md,
+  .icon-1x {
+    width: @medium-icon-size;
+    height: @medium-icon-size;
+  }
+
+  .icon-lg {
+    width: calc(@medium-icon-size * (1 + @icon-size-increase));
+    height: calc(@medium-icon-size * (1 + @icon-size-increase));
+  }
+
+  .icon-xl {
+    width: calc(@medium-icon-size * (1 + @icon-size-increase + @icon-size-increase));
+    height: calc(@medium-icon-size * (1 + @icon-size-increase + @icon-size-increase));
+  }
+
+  .icon-2x {
+    width: calc(@medium-icon-size * 2);
+    height: calc(@medium-icon-size * 2);
+  }
+
+  .icon-3x {
+    width: calc(@medium-icon-size * 3);
+    height: calc(@medium-icon-size * 3);
+  }
+
+  .icon-4x {
+    width: calc(@medium-icon-size * 4);
+    height: calc(@medium-icon-size * 4);
+  }
+
+  .icon-5x {
+    width: calc(@medium-icon-size * 5);
+    height: calc(@medium-icon-size * 5);
+  }
+
+  .icon-6x {
+    width: calc(@medium-icon-size * 6);
+    height: calc(@medium-icon-size * 6);
+  }
+
+  .icon-7x {
+    width: calc(@medium-icon-size * 7);
+    height: calc(@medium-icon-size * 7);
+  }
+
+  .icon-8x {
+    width: calc(@medium-icon-size * 8);
+    height: calc(@medium-icon-size * 8);
+  }
+
+  .icon-9x {
+    width: calc(@medium-icon-size * 9);
+    height: calc(@medium-icon-size * 9);
+  }
+
+  .icon-10x {
+    width: calc(@medium-icon-size * 10);
+    height: calc(@medium-icon-size * 10);
+  }
+}
