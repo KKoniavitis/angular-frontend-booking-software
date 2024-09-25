@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostListener, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from "@angular/core";
 
 import { NzTableModule } from "ng-zorro-antd/table";
 import { FormsModule } from "@angular/forms";
@@ -8,16 +8,19 @@ import { LocationService } from "@shared/services/location/location.service";
 import { Location } from "@shared/services/location/location.interface";
 import { Therapy } from "@shared/services/therapy/therapy.interface";
 import { TherapyService } from "@shared/services/therapy/therapy.service";
+import { Company, CompanyService } from "@shared/services/company/company.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: "app-enterprise-overview",
   templateUrl: "./enterprise-overview.component.html",
   styleUrls: ["./enterprise-overview.component.less"],
   standalone: true,
-  imports: [NzTableModule, CommonModule, FormsModule],
+  imports: [NzTableModule, CommonModule, FormsModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EnterpriseOverviewComponent implements OnInit{
+  products: Company[] = [];
   locations: Location[] = [];
   therapies: Therapy[] = [];
   selectedLocation: string = '';
@@ -25,11 +28,19 @@ export class EnterpriseOverviewComponent implements OnInit{
   showDropdown: boolean = false;
   showDropdownTherapies: boolean = false;
 
-  constructor(private countryService: LocationService, private therapyService: TherapyService) {}
+  constructor(private countryService: LocationService,
+              private therapyService: TherapyService,
+              private companyService: CompanyService,
+              private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.fetchLocations();
     this.fetchTherapies();
+    this.companyService.getCompanies().subscribe(data => {
+      this.products = data;
+      this.cdr.detectChanges();  // Trigger change detection
+    });
   }
 
   fetchLocations() {
