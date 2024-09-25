@@ -12,9 +12,6 @@ export const appRoutes: Routes = [
   {
     path: homePath,
     canActivate: [securedGuard],
-    /* resolve: {
-      appLayoutResolver: appLayoutResolver
-    },*/
     loadChildren: () => import("../app/static/layout/app-layout.routes").then((m) => m.appLayoutRoutes)
   },
   {

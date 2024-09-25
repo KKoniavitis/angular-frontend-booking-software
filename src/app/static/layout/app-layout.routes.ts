@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 
 import { enterpriseOverviewPath } from "../../enterprise-overview/adapters/in/enterprise-overview.routes";
 import { editProfileMainPath } from "@app/site-overview/adapters/in/edit-profile.routes";
+import { productMainPath } from "@app/product-detail/product-detail.routes";
 
 export const appLayoutRoutes: Routes = [
   {
@@ -20,6 +21,11 @@ export const appLayoutRoutes: Routes = [
         path: editProfileMainPath,
         loadChildren: () =>
           import("../../site-overview/adapters/in/edit-profile.routes").then((m) => m.editProfileRoutes)
+      },
+      {
+        path: productMainPath,
+        loadChildren: () =>
+          import("../../product-detail/product-detail.routes").then((m) => m.productRoutes)
       }
     ]
   }
