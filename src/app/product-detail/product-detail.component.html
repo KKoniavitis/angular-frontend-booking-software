@@ -1,10 +1,26 @@
 <div *ngIf="product">
   <h1>{{ product.name }}</h1>
   <img [src]="product.imageUrl" [alt]="product.name" />
+  <div class="map-container">
+    <google-map
+      *ngIf="center"
+      height="400px"
+      width="100%"
+      [center]="center"
+      [zoom]="zoom">
+
+      <!-- Ensure the marker is only displayed if markerPosition is defined -->
+      <map-marker *ngIf="markerPosition" [position]="markerPosition"></map-marker>
+
+    </google-map>
+  </div>
   <p>Location: {{ product.location }}</p>
   <p>Category: {{ product.description }}</p>
+
 </div>
 
 <div *ngIf="!product">
   <p>Product not found.</p>
 </div>
+
+

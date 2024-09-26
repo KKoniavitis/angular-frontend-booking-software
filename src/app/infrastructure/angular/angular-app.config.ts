@@ -52,12 +52,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+import { GoogleMapsModule } from "@angular/google-maps";
 
 dayjsConfig();
 
 export const angularAppConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(
+      GoogleMapsModule,
       BrowserAnimationsModule,
       MatDatepickerModule,
       MatNativeDateModule,

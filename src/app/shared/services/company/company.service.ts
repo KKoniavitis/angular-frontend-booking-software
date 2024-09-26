@@ -6,6 +6,8 @@ export interface Company {
   id: number;
   name: string;
   location: string;
+  latitude: number;
+  longitude: number;
   description: string;
   imageUrl: string;
 }
