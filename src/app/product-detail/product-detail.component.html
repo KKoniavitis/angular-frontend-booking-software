@@ -1,6 +1,20 @@
-<div *ngIf="product">
-  <h1>{{ product.name }}</h1>
-  <img [src]="product.imageUrl" [alt]="product.name" />
+
+<div *ngIf="product" class="product-page">
+  <div class="product-header">
+    <h1 class="product-title">{{ product.name }}</h1>
+  </div>
+
+  <div class="product-content">
+    <div class="product-image">
+      <img [src]="product.imageUrl" [alt]="product.name" />
+    </div>
+
+    <div class="product-details">
+      <p><strong>Location:</strong> {{ product.location }}</p>
+      <p><strong>Category:</strong> {{ product.description }}</p>
+    </div>
+  </div>
+
   <div class="map-container">
     <google-map
       *ngIf="center"
@@ -8,19 +22,11 @@
       width="100%"
       [center]="center"
       [zoom]="zoom">
-
-      <!-- Ensure the marker is only displayed if markerPosition is defined -->
       <map-marker *ngIf="markerPosition" [position]="markerPosition"></map-marker>
-
     </google-map>
   </div>
-  <p>Location: {{ product.location }}</p>
-  <p>Category: {{ product.description }}</p>
-
 </div>
 
-<div *ngIf="!product">
+<div *ngIf="!loading && !product" class="product-not-found">
   <p>Product not found.</p>
 </div>
-
-

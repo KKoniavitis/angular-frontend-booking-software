@@ -23,4 +23,8 @@ export class CompanyService {
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(this.apiUrl);
   }
+
+  getCompanyById(id: number): Observable<Company> {
+    return this.http.get<Company>(`http://localhost:8080/api/companies/${id}`);
+  }
 }
