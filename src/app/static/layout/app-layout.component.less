@@ -18,12 +18,21 @@ main.app-content {
   align-items: flex-start; /* Optional: Aligns content at the top */
   padding: 1rem; /* Optional: Add padding */
   overflow-y: auto; /* Allows scrolling if the content is taller than the screen */
+
+  /* Add background image styling */
+  background-image: url("/assets/images/homepage/background.jpg");
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center; /* Centers the background image */
 }
 
 /* Footer styles */
 .app-footer {
   height: 3rem;
-  background-image: url("/assets/images/homepage/background.jpg");
+  background-image: url("/assets/images/homepage/background.jpg"); /* Different image for the footer */
+  background-size: cover; /* Cover the footer area */
+  background-repeat: no-repeat; /* Prevents repetition */
+  background-position: center; /* Center the footer image */
   flex-shrink: 0; /* Ensures footer stays fixed at the bottom */
 }
 
@@ -35,4 +44,3 @@ main.app-content {
   transform: translate(-50%, -50%);
   z-index: 9999; /* Make sure it's on top of everything else */
 }
-
