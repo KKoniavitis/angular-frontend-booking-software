@@ -9,8 +9,11 @@ export const auth0Config: AuthConfig = {
   useRefreshTokens: true, // true: refresh tokens are used to fetch new access tokens from the Auth0 server
   cacheLocation: "localstorage" as CacheLocation,
   authorizationParams: {
-    redirect_uri: environmentVars.APP_UI_AUTH0_REDIRECT_URI
-  }
+    redirect_uri: environmentVars.APP_UI_AUTH0_REDIRECT_URI,
+    audience: 'http://localhost:8080/api',
+    scope: 'openid profile email offline_access read:appointments write:appointments'
+  },
+  useRefreshTokensFallback: true
 };
 
 export const AUTH_TOKEN_LOCALSTORAGE_KEY = "authToken";

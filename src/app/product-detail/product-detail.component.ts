@@ -4,11 +4,18 @@ import { Company, CompanyService } from "@shared/services/company/company.servic
 import { CommonModule } from "@angular/common";
 import { GoogleMap, MapMarker } from "@angular/google-maps";
 import { switchMap } from 'rxjs/operators';
+import { MatInputModule } from "@angular/material/input";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { NzButtonComponent } from "ng-zorro-antd/button";
+import { NzModalService } from "ng-zorro-antd/modal";
+import { AppointmentModalComponent } from "@shared/components/appointment-modal/appointment-modal.component";
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, GoogleMap, MapMarker],
+  imports: [CommonModule, GoogleMap, MapMarker, MatInputModule, MatDatepickerModule, FormsModule, MatButtonModule, NzButtonComponent],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.less'] // Corrected property name
 })
@@ -30,7 +37,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private cdr: ChangeDetectorRef // Change detector reference
+    private cdr: ChangeDetectorRef, // Change detector reference
+    private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +81,32 @@ export class ProductDetailComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
+      }
+    });
+  }
+
+  openAppointmentModal(): void {
+    const modalRef = this.modal.create({
+      nzTitle: 'Book Appointment',
+      nzContent: AppointmentModalComponent,  // No need to use 'typeof' here
+      nzFooter: null
+    });
+
+    // Set the product as an input for the modal component
+    if (modalRef.componentInstance) {
+      modalRef.componentInstance.product = this.product;
+    }
+
+
+    modalRef.afterClose.subscribe(appointment => {
+      if (appointment) {
+        console.log('Appointment booked:', appointment);
+
+        // Call your backend service to save the appointment
+        this.companyService.bookAppointment(appointment).subscribe(
+          response => console.log('Appointment saved successfully', response),
+          error => console.error('Error saving appointment', error)
+        );
       }
     });
   }

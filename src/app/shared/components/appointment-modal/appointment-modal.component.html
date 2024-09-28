@@ -1,0 +1,29 @@
+<h1 class="modal-title">Book Appointment</h1>
+<div class="modal-content">
+  <nz-form-item class="form-item">
+    <nz-form-label [nzSm]="10" [nzXs]="40">Select Date</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-date-picker
+        [(ngModel)]="selectedDate"
+        [nzSize]="'large'"
+        [nzPlaceHolder]="'Choose a date'"
+        [nzDisabledDate]="disabledDate"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="form-item">
+    <nz-form-label [nzSm]="6" [nzXs]="24">Select Time</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-time-picker
+        [(ngModel)]="selectedTime"
+        [nzSize]="'large'"
+        [nzPlaceHolder]="'Choose a time'"
+        [nzFormat]="'HH:mm'"></nz-time-picker>
+    </nz-form-control>
+  </nz-form-item>
+</div>
+
+<div class="modal-footer">
+  <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+  <button nz-button nzType="primary" (click)="submitForm()">Book</button>
+</div>

@@ -12,6 +12,11 @@
     <div class="product-details">
       <p><strong>Location:</strong> {{ product.location }}</p>
       <p><strong>Category:</strong> {{ product.description }}</p>
+      <!-- Button to open the appointment modal -->
+      <button nz-button nzType="primary" (click)="openAppointmentModal()">
+        Book Appointment
+      </button>
+
     </div>
   </div>
 
