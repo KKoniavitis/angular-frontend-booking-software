@@ -13,7 +13,6 @@ export const auth0Config: AuthConfig = {
     audience: 'http://localhost:8080/api',
     scope: 'openid profile email offline_access read:appointments write:appointments'
   },
-  useRefreshTokensFallback: true
 };
 
 export const AUTH_TOKEN_LOCALSTORAGE_KEY = "authToken";
