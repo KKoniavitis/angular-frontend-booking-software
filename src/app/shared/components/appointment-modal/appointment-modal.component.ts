@@ -38,34 +38,52 @@ export class AppointmentModalComponent {
 
   submitForm(): void {
     if (this.selectedDate && this.selectedTime) {
-      // Get the user information from Auth0
-      this.auth.user$.subscribe(user => {
-        if (user) {
-          const appointmentDetails = {
-            date: this.selectedDate,
-            time: this.selectedTime,
-            companyId: this.product?.id, // Assuming you want to send the product ID too
-            userId: user.sub // Get user ID from Auth0
-          };
+      // Ensure selectedDate is not null before creating Date object
+      const selectedDate: Date | null = this.selectedDate;
+      if (selectedDate) {
+        const appointmentDate = new Date(selectedDate);
 
-          // Call the service to book the appointment
-          this.companyService.bookAppointment(appointmentDetails).subscribe(
-            response => {
-              console.log('Appointment booked successfully:', response);
-              this.modal.close(response); // Close the modal and return the response
-            },
-            error => {
-              console.error('Error booking appointment:', error);
+        // Ensure selectedTime is not null before setting hours and minutes
+        const selectedTime = this.selectedTime;
+        if (selectedTime) {
+          appointmentDate.setHours(selectedTime.getHours());
+          appointmentDate.setMinutes(selectedTime.getMinutes());
+
+          // Get the user information from Auth0
+          this.auth.user$.subscribe(user => {
+            if (user) {
+              const appointmentDetails = {
+                userId: user.sub, // Get user ID from Auth0
+                companyId: this.product?.id, // Assuming you want to send the product ID too
+                appointmentDate: appointmentDate.toISOString() // Convert to ISO string format for backend
+              };
+
+              // Call the service to book the appointment
+              this.companyService.bookAppointment(appointmentDetails).subscribe(
+                response => {
+                  console.log('Appointment booked successfully:', response);
+                  this.modal.close(response); // Close the modal and return the response
+                },
+                error => {
+                  console.error('Error booking appointment:', error);
+                }
+              );
+            } else {
+              console.error('User not logged in.');
             }
-          );
+          });
         } else {
-          console.error('User not logged in.');
+          console.error('Please select a valid time.');
         }
-      });
+      } else {
+        console.error('Please select a valid date.');
+      }
     } else {
       console.error('Please select both a date and a time.');
     }
   }
+
+
 
   cancel(): void {
     this.modal.destroy();

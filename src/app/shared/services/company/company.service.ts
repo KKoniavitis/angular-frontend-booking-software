@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, switchMap } from "rxjs";
-import { AuthService } from "@auth0/auth0-angular";
-
+import { Observable } from "rxjs";
 export interface Company {
   id: number;
   name: string;
@@ -19,7 +17,7 @@ export interface Company {
 export class CompanyService {
   private apiUrl = 'http://localhost:8080/api/companies/all'; // Spring Boot API URL
 
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(this.apiUrl);
@@ -30,16 +28,17 @@ export class CompanyService {
   }
 
   bookAppointment(appointmentDetails: any): Observable<any> {
-    return this.auth.getAccessTokenSilently().pipe(
-      switchMap((token: string | undefined) => {
-        if (!token) {
-          throw new Error('User is not authenticated');
-        }
-
-        //const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-        return this.http.post(`http://localhost:8080/api/appointments`, appointmentDetails);
-      })
-    );
+    // return this.auth.getAccessTokenSilently().pipe(
+    //   switchMap((token: string | undefined) => {
+    //     if (!token) {
+    //       throw new Error('User is not authenticated');
+    //     }
+    //
+    //     //const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    //
+    //     return this.http.post(`http://localhost:8080/api/appointments`, appointmentDetails);
+    //   })
+    // );
+    return this.http.post(`http://localhost:8080/api/appointments`, appointmentDetails);
   }
 }
