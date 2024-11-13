@@ -25,6 +25,9 @@ export class ProductDetailComponent implements OnInit {
   center: google.maps.LatLngLiteral | undefined;
   markerPosition: google.maps.LatLngLiteral | undefined;
   loading = true;
+  showSuccessMessage: boolean = false; // Flag for success message
+  successMessage: string = '';
+  isErrorMessage: boolean = false;
 
   // Static default coordinates for each product
   private defaultCoordinates: { [key: number]: google.maps.LatLngLiteral } = {
@@ -88,25 +91,63 @@ export class ProductDetailComponent implements OnInit {
   openAppointmentModal(): void {
     const modalRef = this.modal.create({
       nzTitle: 'Book Appointment',
-      nzContent: AppointmentModalComponent,  // No need to use 'typeof' here
+      nzContent: AppointmentModalComponent,
       nzFooter: null
     });
 
-    // Set the product as an input for the modal component
     if (modalRef.componentInstance) {
       modalRef.componentInstance.product = this.product;
     }
-
 
     modalRef.afterClose.subscribe(appointment => {
       if (appointment) {
         console.log('Appointment booked:', appointment);
 
-        // Call your backend service to save the appointment
+        // Call backend service to save the appointment
         this.companyService.bookAppointment(appointment).subscribe(
-          response => console.log('Appointment saved successfully', response),
-          error => console.error('Error saving appointment', error)
+          response => {
+            console.log('Appointment saved successfully', response);
+
+            // Show success message
+            this.successMessage = 'Το ραντεβού αποθηκεύτηκε επιτυχώς!';
+            this.isErrorMessage = false;
+            this.showSuccessMessage = true;
+            this.cdr.detectChanges(); // Trigger UI update
+
+            // Optionally hide the message after 3 seconds
+            setTimeout(() => {
+              this.showSuccessMessage = false;
+              this.cdr.detectChanges(); // Ensure UI update
+            }, 3000);
+          },
+          error => {
+            console.error('Error saving appointment', error);
+
+            // Show error message
+            this.successMessage = 'Το ραντεβού αποθηκεύτηκε επιτυχώς!';
+            this.isErrorMessage = true;
+            this.showSuccessMessage = true;
+            this.cdr.detectChanges(); // Trigger UI update
+
+            // Optionally hide the error message after 3 seconds
+            setTimeout(() => {
+              this.showSuccessMessage = false;
+              this.cdr.detectChanges(); // Ensure UI update
+            }, 3000);
+          }
         );
+      } else {
+        // Modal closed without appointment
+        this.successMessage = 'Η κράτηση ραντεβού ακυρώθηκε.';
+        this.isErrorMessage = true;
+        this.showSuccessMessage = true;
+        this.cdr.detectChanges(); // Trigger UI update
+
+        // Optionally hide the message after 3 seconds
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+          this.cdr.detectChanges(); // Ensure UI update
+        }, 3000);
       }
     });
   }

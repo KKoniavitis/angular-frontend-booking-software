@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "@auth0/auth0-angular";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "app-site-overview",
@@ -26,7 +25,7 @@ export class EditProfileComponent implements OnInit{
   showSuccessMessage: boolean = false; // Flag for success message
   successMessage: string = 'Το προφίλ αποθηκεύτηκε επιτυχώς!'; // The message text
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -60,12 +59,12 @@ export class EditProfileComponent implements OnInit{
     console.log('Profile updated:', this.user);
     this.showSuccessMessage = true; // Show the success message
 
-    setTimeout(() => {
-      this.showSuccessMessage = false; // Hide the message after 3 seconds
-      this.router.navigateByUrl('/edit-profile', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/edit-profile']);
-        window.location.reload();
-      });
-    }, 1500); // Adjust the time as needed
+    // setTimeout(() => {
+    //   this.showSuccessMessage = false; // Hide the message after 3 seconds
+    //   this.router.navigateByUrl('/edit-profile', { skipLocationChange: true }).then(() => {
+    //     this.router.navigate(['/edit-profile']);
+    //     window.location.reload();
+    //   });
+    // }, 1500); // Adjust the time as needed
   }
 }
